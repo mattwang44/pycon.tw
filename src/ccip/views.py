@@ -152,12 +152,13 @@ def _transform_session(request, event, type_key, info_getter):
         for speaker in event_info.speakers
     ]
 
+    begin_time = event.begin_time.value.isoformat() if event.begin_time else None
+    end_time = event.begin_time.value.isoformat() if event.end_time else None
     session = {
         'id': f'{type_key}-{event_info.pk}',
         'type': type_key,
-
-        'start': event.begin_time.value.isoformat(),
-        'end': event.end_time.value.isoformat(),
+        'start': begin_time,
+        'end': end_time,
         'slide': event_info.slide_link,
         'speakers': [speaker['id'] for speaker in speakers],
         'tags': [tag['id'] for tag in tags],
