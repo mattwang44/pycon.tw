@@ -256,13 +256,15 @@ class CCIPAPIView(View):
                     request=request, event=event,
                     type_key=type_key, info_getter=info_getter,
                 )
-                rooms[room['id']] = room
+                if room['id']:
+                    rooms[room['id']] = room
                 speakers.update({s['id']: s for s in sess_speakers})
                 tags.update({t['id']: t for t in sess_tags})
                 sessions.append(session)
 
         def _room_sort_key(v):
-            return v['id'].split('-', 1)[-1]
+            _id = v.get('id')
+            return _id.split('-', 1)[-1] if _id else ''
 
         return JsonResponse({
             'rooms': sorted(rooms.values(), key=_room_sort_key),
