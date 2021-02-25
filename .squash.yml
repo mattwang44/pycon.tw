@@ -1,0 +1,8 @@
+deployments:
+  MyApp:
+    filename:
+      ./docker-compose-dev.yml
+    port_forwarding:
+      # docker-compose requires both ports to be the same. This is the port where your
+      # application is listening to.
+      8000:8000
