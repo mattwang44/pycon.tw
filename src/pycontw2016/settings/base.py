@@ -101,6 +101,7 @@ THIRD_PARTY_APPS = (
     'import_export',
     'sorl.thumbnail',
     'registry',
+    'corsheaders'
 )
 
 LOCAL_APPS = (
@@ -132,7 +133,10 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'pycontw2016.urls'
 
@@ -323,4 +327,4 @@ EVENTS_DAY_NAMES = collections.OrderedDict([
 
 SCHEDULE_REDIRECT_URL = None
 
-COC_VERSION = '2020.0'
+COC_VERSION = '2021.0'
