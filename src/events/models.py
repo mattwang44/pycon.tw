@@ -224,10 +224,11 @@ class KeynoteEvent(BaseEvent):
     )
     session_title = models.CharField(
         verbose_name=_('keynote session title'),
-        max_length=140,
+        max_length=140, null=True
     )
     session_description = models.TextField(
         verbose_name=_('keynote session description'),
+        blank=True, null=True
     )
     session_slides = models.URLField(
         verbose_name=_('session slides'),
