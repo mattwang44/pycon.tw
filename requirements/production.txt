@@ -2,7 +2,7 @@
 # Psycopg is the most popular PostgreSQL database adapter for the Python
 # programming language.
 # https://www.psycopg.org/
-psycopg2==2.8.4
+psycopg2==2.9.1
 
 # uWSGI aims at developing a full stack for building hosting services
 # https://uwsgi-docs.readthedocs.io/
