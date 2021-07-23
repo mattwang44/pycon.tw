@@ -3,22 +3,18 @@ FROM python:3.6-slim-buster
 ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
-ENV BASE_DIR /usr/local
-
-ENV NVM_INSTALLER_URL https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
-ENV NVM_DIR $BASE_DIR/nvm
-ENV YARN_VERSION 1.15.2-1
-ENV NODE_VERSION 8.16.0
+# env vars for installing node
+ENV NVM_INSTALLER_URL https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+ENV NVM_DIR="/root/.nvm"
+ENV NODE_VERSION v12.19.0
 
 # make nodejs and yarn accessible and executable globally
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 
 # Infrastructure tools
 # gettext is used for django to compile .po to .mo files.
 RUN apt-get update
-RUN apt-get install apt-utils -y
-RUN apt-get update
-RUN apt-get install gettext python3-pip -y
+RUN apt-get install apt-utils gettext python3-pip -y
 
 # Install Node and Yarn from upstream
 RUN curl -o- $NVM_INSTALLER_URL | bash \
@@ -34,7 +30,7 @@ RUN curl -o- $NVM_INSTALLER_URL | bash \
 COPY ./requirements ./requirements
 RUN pip3 install -r ./requirements/dev.txt
 
-# # Install Javascript dependencies
+# Install Javascript dependencies
 COPY ./package.json ./package.json
 COPY ./yarn.lock ./yarn.lock
 RUN yarn install --dev --frozen-lockfile
